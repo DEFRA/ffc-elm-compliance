@@ -1,6 +1,0 @@
-apiVersion: v1
-appVersion: "1.0"
-description: Environmental Land Management compliance facts service
-name: ffc-elm-compliance
-# version is overwritten by the build pipline
-version: 1.0.0
