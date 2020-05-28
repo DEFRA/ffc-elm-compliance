@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Defra Compliance scheme check
+  license:
+    name: OGL-UK-3.0
+servers:
+  - url: http://compliance.ffc.defra.gov.uk/v1
+paths:
+  /schemes/{sbi}:
+    get:
+      summary: Check scheme(s) for a specific business
+      tags:
+        - business
+      parameters:
+        - name: sbi
+          in: path
+          required: true
+          description: The Single Business Identifier of the business to check
+          schema:
+            type: string
+        - name: date
+          in: query
+          required: false
+          description: The date to return schemes for
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemeCheckResult'
+        204:
+          description: Expected response when there is no data to return
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      
+components:
+  schemas:
+    SchemeCheckResult:
+      type: array
+      items:
+        type: object
+        properties:
+          sbi:
+            type: string
+          schemeId:
+            type: string
+          dateStart:
+            type: string
+            format: date
+          dateEnd:
+            type: string
+            format: date
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
