@@ -1,18 +1,18 @@
 const Joi = require('@hapi/joi')
 
 module.exports = Joi.object({
-  Id: Joi.integer().required(),
-  SBI: Joi.string().required(),
-  AGREEMENT_CODE: Joi.string().required(),
-  AGREEMENT_DESC: Joi.string().required(),
-  SCHEME_OPTION: Joi.string().required(),
-  SCHEME_OPTION_DESC: Joi.string().required(),
-  DURATION: Joi.string().required(),
-  AGREEMENT_START_YR: Joi.string().required(),
-  AGREEMENT_END_YR: Joi.string().required(),
-  AGREEMENT_START_DT: Joi.string().required(),
-  AGREEMENT_END_DT: Joi.string().required(),
-  PARCEL_ID: Joi.string().required(),
-  PARCEL: Joi.string().required(),
-  HECTARES: Joi.string().required()
+  id: Joi.integer().required(),
+  sbi: Joi.string().required(),
+  agreementCode: Joi.string().required(),
+  agreementDesc: Joi.string().required(),
+  schemeOption: Joi.string().required(),
+  schemeOptionDesc: Joi.string().required(),
+  duration: Joi.string().required(),
+  agreementStartYear: Joi.string().required(),
+  agreementEndYear: Joi.string().required(),
+  agreementStartDate: Joi.string().required(),
+  agreementEndDate: Joi.string().required(),
+  parcelId: Joi.string().required(),
+  parcel: Joi.string().required(),
+  hectares: Joi.string().required()
 })
