@@ -10,7 +10,19 @@ services:
     environment:
       LOG_REQUESTS: ${LOG_REQUESTS:-true}
     image: ffc-elm-compliance
+    depends_on:
+      - ffc-demo-compliance-postgres
     networks:
       default:
         aliases:
           - ffc-elm-compliance
+
+  ffc-demo-compliance-postgres:
+    image: postgres:11.4-alpine
+    env_file:
+      - variables/postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: {}
