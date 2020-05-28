@@ -8,11 +8,7 @@ project="ffc-elm-compliance"
 service="app"
 
 compose() {
-  LOG_REQUESTS=false docker-compose \
-    -f docker-compose.yaml \
-    -f docker-compose.test.yaml \
-    -p "${project}-test" \
-    $@
+  LOG_REQUESTS=false docker-compose -p "${project}-test" "$@"
 }
 
 (
@@ -24,8 +20,11 @@ compose() {
   # Ensure container images are up to date
   compose build
 
-  # Run tests
-  compose run ${service} ${command}
+  # Run tests or the provided command
+  compose run ${service} sh -c "\
+    scripts/wait-for/wait-for postgres:5432 --\
+    npm run migrate && ${command:-npm run test}\
+  "
 
   # Clean up
   compose down --volumes

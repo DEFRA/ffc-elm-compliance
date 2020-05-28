@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     agreementEndDate: { field: 'AGREEMENT_END_DT', type: DataTypes.DATE },
     parcelId: { field: 'PARCEL_ID', type: DataTypes.STRING },
     parcel: { field: 'PARCEL', type: DataTypes.STRING },
-    hectares: { field: 'HECTARES', type: DataTypes.STRIN }G
+    hectares: { field: 'HECTARES', type: DataTypes.STRING }
   }, {
     freezeTableName: true,
     tableName: 'scheme'
