@@ -5,7 +5,7 @@ const databaseConfig = require('./database-config')
 const schema = Joi.object({
   env: Joi.string().valid('development', 'production').default('development'),
   logRequests: Joi.string().valid('true', 'false').default('true'),
-  port: Joi.number().default(3000)
+  port: Joi.number().default(3004)
 })
 
 // Build config

@@ -42,7 +42,7 @@ The following environment variables are required by the application container. D
 | Name                                  | Description                | Required | Default               | Valid                       |
 |---------------------------------------|----------------------------|:--------:|-----------------------|-----------------------------|
 | NODE_ENV                              | Node environment           | no       | development           | development,test,production |
-| PORT                                  | Port number                | no       | 3000                  |                             |
+| PORT                                  | Port number                | no       | 3004                  |                             |
 | STATIC_CACHE_TIMEOUT_IN_MILLIS        | static file cache timeout  | no       | 54000 (15 minutes)    |                             |
 
 ## How to run tests
@@ -146,7 +146,7 @@ Alternatively, a local port may be forwarded to the pod:
 
 ```
 # Forward local port to the Kubernetes deployment
-kubectl port-forward --namespace=ffc-elm-compliance deployment/ffc-elm-compliance 3000:3000
+kubectl port-forward --namespace=ffc-elm-compliance deployment/ffc-elm-compliance 3004:3004
 ```
 
 #### Probes

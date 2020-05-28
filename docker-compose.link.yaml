@@ -14,7 +14,7 @@ services:
         aliases:
           - ffc-elm-compliance
     ports:
-      - "3000:3000"
+      - "3004:3004"
     volumes:
       - ./.git/:/home/node/.git/ # Git is required by Jest file watcher
       - ./app/:/home/node/app/

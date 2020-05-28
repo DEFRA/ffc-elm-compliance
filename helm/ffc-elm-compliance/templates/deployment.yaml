@@ -48,10 +48,10 @@ spec:
         - name: NODE_ENV
           value: {{ quote .Values.environment }}
         - name: PORT
-          value: "3000"
+          value: "3004"
         ports:
         - name: http
-          containerPort: 3000
+          containerPort: 3004
           protocol: TCP
         resources:
           requests:
