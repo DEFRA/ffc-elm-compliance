@@ -8,7 +8,11 @@ services:
   app:
     build:
       target: development
-    command: npm test
+    command: >
+      sh -c "
+        scripts/wait-for/wait-for postgres:5432 --
+        npm run migrate &&
+        npm run test"
     environment:
       LOG_REQUESTS: 'false'
     image: ffc-elm-compliance-test

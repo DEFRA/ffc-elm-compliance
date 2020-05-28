@@ -9,6 +9,7 @@
   },
   "main": "app/index.js",
   "scripts": {
+    "migrate": "sequelize db:migrate",
     "pretest": "npm run test:lint",
     "test": "npm run test:unit",
     "test:lint": "standard",
@@ -18,15 +19,16 @@
   },
   "author": "Defra DDTS",
   "contributors": [
-    "John Watson <john.watson2@rpa.gov.uk>",
-    "Mark Harrop <mark.harrop@defra.gov.uk>",
     "Matthew Collins <matthew.collins@defra.gov.uk>",
     "David Bingham <david.bingham@defra.gov.uk>"
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@hapi/hapi": "^18.4.1",
-    "@hapi/joi": "^16.1.7"
+    "@hapi/joi": "^16.1.7",
+    "pg": "^8.2.1",
+    "sequelize": "^5.21.11",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "@hapi/good": "^8.2.3",
