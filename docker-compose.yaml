@@ -16,11 +16,6 @@ services:
     image: ffc-elm-compliance
     depends_on:
       - postgres
-    volumes:
-      - ./app/:/home/node/app/
-      - ./scripts/:/home/node/scripts/
-      - ./index.js:/home/node/index.js
-      - ./package.json:/home/node/package.json
     networks:
       default:
         aliases:

@@ -20,3 +20,4 @@ services:
       - ./jest.setup.js:/home/node/jest.setup.js
       - ./package.json:/home/node/package.json
       - ./package-lock.json:/home/node/package-lock.json
+      - ./scripts/:/home/node/scripts/
