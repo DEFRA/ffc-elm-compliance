@@ -84,12 +84,9 @@ The application is designed to run in containerised environments, using Docker C
 
 ### Build container image
 
-Container images are built using Docker Compose. They extend FFC parent images so building will fail without access to the private FFC Docker registry.
+Container images are built using Docker Compose. They extend FFC parent images so building will fail without access to the parent images in the dockerhub registry.
 
 ```
-# Authenticate with FFC Docker registry (requires pre-configured AWS credentials on your machine)
-aws ecr get-login-password | docker login --password-stdin --username AWS 171014905211.dkr.ecr.eu-west-2.amazonaws.com
-
 # Build container images
 docker-compose build
 ```
