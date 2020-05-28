@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      target: production
+      args:
+        REGISTRY: ${DOCKER_REGISTRY}
+    environment:
+      LOG_REQUESTS: ${LOG_REQUESTS:-true}
+    image: ffc-elm-compliance
+    networks:
+      default:
+        aliases:
+          - ffc-elm-compliance

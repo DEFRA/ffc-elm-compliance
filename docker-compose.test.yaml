@@ -1,0 +1,19 @@
+version: '3.7'
+
+# This override file should be used when running tests in CI pipelines
+# to run tests against app code from the Docker image without binding
+# ports to the host machine.
+
+services:
+  app:
+    build:
+      target: development
+    command: npm test
+    environment:
+      LOG_REQUESTS: 'false'
+    image: ffc-elm-compliance-test
+    volumes:
+      - ./jest.config.js:/home/node/jest.config.js
+      - ./jest.setup.js:/home/node/jest.setup.js
+      - ./test/:/home/node/test/
+      - ./test-output/:/home/node/test-output/
