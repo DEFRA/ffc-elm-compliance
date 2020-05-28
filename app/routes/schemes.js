@@ -7,7 +7,11 @@ module.exports = {
     handler: async (request, h) => {
       const { sbi } = request.params
       console.log(sbi)
-      return h.response().code(500)
+      const result = {
+        items: [
+        ]
+      }
+      return h.response(result).code(200)
     },
     validate: {
       params: Joi.object({

@@ -26,7 +26,7 @@ describe('GET /schemes/{sbi}', () => {
 
     const response = await server.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.headers['content-type']).toBe('text/html; charset=utf-8')
+    expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
   })
 
   test('rejects SBI of length other than 9 characters', async () => {
