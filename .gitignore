@@ -3,7 +3,6 @@
 .npm/
 .standard-v12-cache/
 .vscode/
-app/public/build/
 node_modules/
 auth
 .env
