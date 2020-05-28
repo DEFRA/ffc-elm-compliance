@@ -6,15 +6,9 @@ Environmental Land Management compliance facts service.
 
 ## Prerequisites
 
-AWS credentials with access to the container registry where FFC parent images are stored.
-
 Either:
 - Docker
 - Docker Compose
-
-Or:
-- Kubernetes
-- Helm
 
 Or:
 - Node 12
@@ -32,18 +26,17 @@ The following environment variables are required in development environments run
 Example `.env` file:
 
 ```
-DOCKER_REGISTRY=registry.example.com
+DOCKER_REGISTRY=defradigital
 ```
 
 ### In production
 
-The following environment variables are required by the application container. Default values for production-like deployments are set in the Helm chart and may be overridden by build and release pipelines.
+The following environment variables are required by the application container.
 
 | Name                                  | Description                | Required | Default               | Valid                       |
 |---------------------------------------|----------------------------|:--------:|-----------------------|-----------------------------|
 | NODE_ENV                              | Node environment           | no       | development           | development,test,production |
 | PORT                                  | Port number                | no       | 3004                  |                             |
-| STATIC_CACHE_TIMEOUT_IN_MILLIS        | static file cache timeout  | no       | 54000 (15 minutes)    |                             |
 
 ## How to run tests
 
@@ -89,8 +82,6 @@ Given that tests can be run in the main app container during development, it may
 
 The application is designed to run in containerised environments, using Docker Compose in development and Kubernetes in production.
 
-- A Helm chart is provided in `./helm` for production deployments to Kubernetes.
-
 ### Build container image
 
 Container images are built using Docker Compose. They extend FFC parent images so building will fail without access to the private FFC Docker registry.
@@ -129,70 +120,12 @@ Additional Docker Compose files are provided for scenarios such as linking to ot
 docker-compose -f docker-compose.yaml -f docker-compose.link.yaml up
 ```
 
-### Helm chart
-
-For deployments to Kubernetes, a helm chart is included in the `./helm` folder. The chart is configurable through input values, with defaults defined in `./helm/values.yaml`.
-
-#### Accessing the pod
-
-The service is exposed via a Kubernetes ingress, which requires an ingress controller to be running on the cluster. For example, the NGINX Ingress Controller may be installed via Helm:
-
-```
-# Install nginx-ingress into its own namespace
-helm install --namespace nginx-ingress nginx-ingress
-```
-
-Alternatively, a local port may be forwarded to the pod:
-
-```
-# Forward local port to the Kubernetes deployment
-kubectl port-forward --namespace=ffc-elm-compliance deployment/ffc-elm-compliance 3004:3004
-```
-
 #### Probes
 
 The service has HTTP readiness and liveness probes at the following end points.
 
 Readiness: `/healthy`
 Liveness: `/healthz`
-
-#### Basic Authentication
-
-When deployed with an NGINX Ingress Controller, the ingress may be protected with basic authentication by setting the `auth` value to a base64-encoded `htpasswd` output.
-
-For example:
-
-```
-# Create credentials
-credentials=$(htpasswd -n "${username}" | base64)
-
-# Install or upgrade Helm chart with basic auth
-helm upgrade --atomic --install --set auth=${credentials} ffc-elm-compliance ./helm
-```
-
-__How basic auth is configured__
-
-Basic authentication is enabled via labels on the ingress object. Those labels are read by the NGINX Ingress Controller and used to configure basic authentication for incoming traffic. One of the labels provides the name of a Kubernetes secret in which credentials are stored as the encoded output of a `htpasswd` command. The ingress controller uses the value of that secret to verify any basic auth attempt.
-
-If it wasn't defined by the Helm chart, the secret could be created via the following command:
-
-```
-# Create basic auth secret for username 'defra'
-kubectl create secret generic ffc-elm-compliance-basic-auth2 --from-literal "auth=$(htpasswd -n defra)"
-```
-
-#### Amazon Load Balancer
-
-Settings are available in the Helm charts to use the Amazon Load Balancer Ingress Controller rather than an NGINX Ingress Controller.
-Additional child settings below `ingress` are available allowing the user to set [resource tags](https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/#tags) and the arn of an [SSL certificate](https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/#certificate-arn), i.e.
-
-```
-# helm/values.yaml
-ingress:
-  alb:
-    tags: Name=myservername,Environment=myEnv,Project=MyProject,ServiceType=LOB
-    arn: arn:aws:acm:eu-west-2:123456:certificate/abcdef0000-123a-4321-abc8-a1234567z
-```
 
 ### Running without containers
 
@@ -205,10 +138,6 @@ npm run build
 # Run the application
 node app
 ```
-
-## Build Pipeline
-
-A [`Jenkinsfile`](./Jenkinsfile) is included, which defines the build and test pipeline for this application.
 
 ## Licence
 
