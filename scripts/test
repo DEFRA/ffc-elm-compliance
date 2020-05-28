@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+set -e
+projectRoot="$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; pwd)"
+
+command="$@"
+project="ffc-elm-compliance"
+service="app"
+
+compose() {
+  LOG_REQUESTS=false docker-compose -p "${project}-test" "$@"
+}
+
+(
+  cd "${projectRoot}"
+
+  # Guarantee clean environment
+  compose down --volumes
+
+  # Ensure container images are up to date
+  compose build
+
+  # Run tests or the provided command
+  compose run ${service} sh -c "\
+    scripts/wait-for/wait-for postgres:5432 --\
+    npm run migrate && ${command:-npm run test}\
+  "
+
+  # Clean up
+  compose down --volumes
+)

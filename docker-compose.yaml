@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      target: production
+      args:
+        REGISTRY: ${DOCKER_REGISTRY}
+    env_file:
+      - variables/postgres.env
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      LOG_REQUESTS: ${LOG_REQUESTS:-true}
+    image: ffc-elm-compliance
+    depends_on:
+      - postgres
+    networks:
+      default:
+        aliases:
+          - ffc-elm-compliance
+
+  postgres:
+    image: postgres:11.4-alpine
+    env_file:
+      - variables/postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: {}

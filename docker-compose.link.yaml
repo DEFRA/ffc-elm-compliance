@@ -1,0 +1,29 @@
+version: '3.7'
+
+# This override file should be used in development environments to
+# connect this service to sibling services from other repositories.
+# Dependencies shared with other projects should be started separately.
+
+services:
+  app:
+    build:
+      target: development
+    image: ffc-elm-compliance-development
+    networks:
+      ffc-elm:
+        aliases:
+          - ffc-elm-compliance
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./.git/:/home/node/.git/ # Git is required by Jest file watcher
+      - ./app/:/home/node/app/
+      - ./test/:/home/node/test/
+      - ./test-output/:/home/node/test-output/
+      - ./jest.config.js:/home/node/jest.config.js
+      - ./package.json:/home/node/package.json
+      - ./package-lock.json:/home/node/package-lock.json
+
+networks:
+  ffc-elm:
+    external: true
