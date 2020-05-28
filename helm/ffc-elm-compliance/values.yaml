@@ -22,7 +22,6 @@ container:
   readOnlyRootFilesystem: true
   allowPrivilegeEscalation: false
   restartPolicy: Always
-  staticCacheTimeoutMillis: 54000
 
 ingress:
   endPoint: ffc-elm-compliance

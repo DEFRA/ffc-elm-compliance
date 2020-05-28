@@ -5,16 +5,14 @@ const databaseConfig = require('./database-config')
 const schema = Joi.object({
   env: Joi.string().valid('development', 'production').default('development'),
   logRequests: Joi.string().valid('true', 'false').default('true'),
-  port: Joi.number().default(3000),
-  staticCacheTimeoutMillis: Joi.number().default(15 * 60 * 1000)
+  port: Joi.number().default(3000)
 })
 
 // Build config
 const config = {
   env: process.env.NODE_ENV,
   logRequests: process.env.LOG_REQUESTS,
-  port: process.env.PORT,
-  staticCacheTimeoutMillis: process.env.STATIC_CACHE_TIMEOUT_IN_MILLIS
+  port: process.env.PORT
 }
 
 // Validate config
