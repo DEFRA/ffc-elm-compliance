@@ -15,13 +15,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       AGREEMENT_DESC: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       SCHEME_OPTION: {
         type: Sequelize.STRING
       },
       SCHEME_OPTION_DESC: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       DURATION: {
         type: Sequelize.STRING

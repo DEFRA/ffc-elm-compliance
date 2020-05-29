@@ -9,3 +9,4 @@ auth
 lcov.info
 npm-debug.log
 test-output
+example-data/

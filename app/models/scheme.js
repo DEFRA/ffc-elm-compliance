@@ -1,7 +1,7 @@
 'use strict'
 module.exports = (sequelize, DataTypes) => {
   const scheme = sequelize.define('scheme', {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     sbi: { field: 'SBI', type: DataTypes.STRING },
     agreementCode: { field: 'AGREEMENT_CODE', type: DataTypes.STRING },
     agreementDesc: { field: 'AGREEMENT_DESC', type: DataTypes.STRING },
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     hectares: { field: 'HECTARES', type: DataTypes.STRING }
   }, {
     freezeTableName: true,
-    tableName: 'scheme'
+    tableName: 'schemes'
   })
   scheme.associate = function (models) {
     // associations can be defined here

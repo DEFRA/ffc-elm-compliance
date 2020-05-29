@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi')
 
 module.exports = Joi.object({
-  id: Joi.integer().required(),
+  id: Joi.number().integer(),
   sbi: Joi.string().required(),
   agreementCode: Joi.string().required(),
   agreementDesc: Joi.string().required(),
@@ -14,5 +14,5 @@ module.exports = Joi.object({
   agreementEndDate: Joi.string().required(),
   parcelId: Joi.string().required(),
   parcel: Joi.string().required(),
-  hectares: Joi.string().required()
+  hectares: Joi.string()
 })
