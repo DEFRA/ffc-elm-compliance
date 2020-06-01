@@ -45,20 +45,23 @@ paths:
 components:
   schemas:
     SchemeCheckResult:
-      type: array
-      items:
-        type: object
-        properties:
-          sbi:
-            type: string
-          schemeId:
-            type: string
-          dateStart:
-            type: string
-            format: date
-          dateEnd:
-            type: string
-            format: date
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              sbi:
+                type: string
+              schemeId:
+                type: string
+              dateStart:
+                type: string
+                format: date
+              dateEnd:
+                type: string
+                format: date
     Error:
       type: object
       required:
