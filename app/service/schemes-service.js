@@ -7,8 +7,8 @@ module.exports = {
       return {
         sbi: sbi,
         schemeId: scheme.agreementCode,
-        dateStart: scheme.dateStart,
-        dateEnd: scheme.dateEnd
+        dateStart: scheme.agreementStartDate,
+        dateEnd: scheme.agreementEndDate
       }
     })
     return result

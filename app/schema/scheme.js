@@ -10,8 +10,8 @@ module.exports = Joi.object({
   duration: Joi.string().required(),
   agreementStartYear: Joi.string().required(),
   agreementEndYear: Joi.string().required(),
-  agreementStartDate: Joi.string().required(),
-  agreementEndDate: Joi.string().required(),
+  agreementStartDate: Joi.date().required(),
+  agreementEndDate: Joi.date().required(),
   parcelId: Joi.string().required(),
   parcel: Joi.string().required(),
   hectares: Joi.string()

@@ -1,6 +1,5 @@
 const parse = require('csv-parse')
 const fs = require('fs')
-// const schemeSchema = require('../app/schema/scheme')
 const repo = require('../app/repository/scheme-repository')
 
 const processArgs = (args) => {
@@ -52,11 +51,9 @@ parser.on('readable', async () => {
         parcel: record.PARCEL,
         hectares: record.HECTARES
       }
-      // await schemeSchema.validateAsync(importScheme)
       console.log(importScheme)
       await repo.create(importScheme)
       processed++
-      // inStream.destroy()
     }
   }
 })
