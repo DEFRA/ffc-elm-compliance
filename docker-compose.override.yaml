@@ -21,3 +21,4 @@ services:
       - ./package.json:/home/node/package.json
       - ./package-lock.json:/home/node/package-lock.json
       - ./scripts/:/home/node/scripts/
+      - ./example-data/:/home/node/example-data/

@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi')
+const schemesService = require('../service/schemes-service')
 
 module.exports = {
   method: 'GET',
@@ -6,12 +7,15 @@ module.exports = {
   options: {
     handler: async (request, h) => {
       const { sbi } = request.params
-      console.log(sbi)
-      const result = {
-        items: [
-        ]
+      const schemes = await schemesService.getBySbi(sbi)
+      if (schemes.length > 0) {
+        const result = {
+          items: schemes
+        }
+        return h.response(result).code(200)
+      } else {
+        return h.response().code(204)
       }
-      return h.response(result).code(200)
     },
     validate: {
       params: Joi.object({
