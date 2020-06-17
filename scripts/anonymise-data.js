@@ -27,7 +27,7 @@ let processed = 0
 const SbiReplacementList = ['106599008']
 let fakeSbiCounter = 107000000
 let fakeAgreementCounter = 11111
-let fakeParcelId = 1111222
+let fakeParcelIdCounter = 1111222
 const fakeSbiList = {}
 const getFakeIdentifiers = (SBI) => {
   const existingFakeIdentifiers = fakeSbiList[SBI]
@@ -61,15 +61,15 @@ parser.on('readable', async () => {
     }
     // SBI,AGREEMENT_CODE,AGREEMENT_DESC,SCHEME_OPTION,SCHEME_OPTION_DESC,DURATION,AGREEMENT_START_YR,AGREEMENT_END_YR,AGREEMENT_START_DT,AGREEMENT_END_DT,PARCEL_ID,PARCEL,HECTARES
     if (processed > 1) {
-      const [fakeSbiId, fakeAgreementId] = getFakeIdentifiers(record[0])
-      record[0] = fakeSbiId
-      record[1] = record[1].replace(/\d*(\/.*)*/, `${fakeAgreementId}$1`)
-      record[10] = fakeParcelId
+      const [fakeSbi, fakeAgreementCode] = getFakeIdentifiers(record[0])
+      record[0] = fakeSbi
+      record[1] = record[1].replace(/\d*(\/.*)*/, `${fakeAgreementCode}$1`)
+      record[10] = fakeParcelIdCounter
       record[11] = 'NN22224444'
       for (const i of [1, 2, 3, 4, 8, 9, 10, 11]) {
         record[i] = `"${record[i]}"`
       }
-      fakeParcelId++
+      fakeParcelIdCounter++
     }
     console.log(record.join(','))
   }

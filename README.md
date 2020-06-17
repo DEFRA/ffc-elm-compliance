@@ -133,7 +133,7 @@ It's called by running the import script, passing in the filename of the csv fil
 
 There is also an `npm` script that will import the first 3000 records from a file called `example-data/testfile.csv`
 
-To anonymise a csv file, there is also a script alled `anonymise-data.js` which will replace the Sbi, Agreement code, Parcel ID and Parcel grid ref with valid data from a counter. This is run by passing in a file, and it will write the results to the console. Redirect the console to an appropriate file to store the data. This also accepts a number of records to anonymise.
+To anonymise a csv file, there is also a script called `anonymise-data.js` which will replace the Sbi, Agreement code, Parcel ID and Parcel grid ref with valid data from a counter. This is run by passing in a file, and it will write the results to the console. Redirect the console to an appropriate file to store the data. This also accepts a number of records to anonymise.
 
 `scripts/anonymise-data.js example-data/fileToAnonymise.csv 100 > example-data/testfile.csv`
 
