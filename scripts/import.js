@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const parse = require('csv-parse')
 const fs = require('fs')
 const repo = require('../app/repository/scheme-repository')

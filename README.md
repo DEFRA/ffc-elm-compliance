@@ -117,6 +117,26 @@ Additional Docker Compose files are provided for scenarios such as linking to ot
 docker-compose -f docker-compose.yaml -f docker-compose.link.yaml up
 ```
 
+#### Anonymising and importing test data
+
+There is an import script to import data from a csv file into the database. This expects the csv file to be in the format
+
+```
+
+SBI,AGREEMENT_CODE,AGREEMENT_DESC,SCHEME_OPTION,SCHEME_OPTION_DESC,DURATION,AGREEMENT_START_YR,AGREEMENT_END_YR,AGREEMENT_START_DT,AGREEMENT_END_DT,PARCEL_ID,PARCEL,HECTARES
+
+```
+
+It's called by running the import script, passing in the filename of the csv file to import, and the number of records to import. If the number of records is left blank, it will default to only importing the first 3000 records.
+
+`scripts/import.js example-data/testfile.csv 100`
+
+There is also an `npm` script that will import the first 3000 records from a file called `example-data/testfile.csv`
+
+To anonymise a csv file, there is also a script called `anonymise-data.js` which will replace the Sbi, Agreement code, Parcel ID and Parcel grid ref with valid data from a counter. This is run by passing in a file, and it will write the results to the console. Redirect the console to an appropriate file to store the data. This also accepts a number of records to anonymise.
+
+`scripts/anonymise-data.js example-data/fileToAnonymise.csv 100 > example-data/testfile.csv`
+
 #### Probes
 
 The service has HTTP readiness and liveness probes at the following end points.
